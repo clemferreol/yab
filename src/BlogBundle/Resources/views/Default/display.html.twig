@@ -1,0 +1,64 @@
+{% extends 'BlogBundle::layout.html.twig' %}
+
+{% block content %}
+    <div>
+        <a class="pointer" onclick="document.location = '{{ path('home')}}';">Retour à la liste d'article</a>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Auteur</th>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Contenu</th>
+                <th>
+                  Catégorie
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+
+                    <td>{{ post.author.username }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.createdAt | date('Y-m-d') }}</td>
+                    <td>{{ post.content }}</td>
+                    <td>{{ post.category }}</td>
+                </tr>
+
+            </tbody>
+        </table><br /><br />
+
+        {% if is_granted('ROLE_USER') %}
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                {% endif %}
+        <h2>Commentaires</h2>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Auteur</th>
+                        <th>Date</th>
+                        <th>Contenu</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for comments in post.comments %}
+                        <tr>
+                            <td>{{ comments.author.username }}</td>
+                            <td>{{ comments.date|date("Y/m/d") }}</td>
+                            <td>{{ comments.content }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

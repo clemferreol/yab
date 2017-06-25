@@ -1,0 +1,24 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+
+    admin.category:
+        class: BlogBundle\Admin\CategoryAdmin
+        arguments: [~, BlogBundle\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Category, group: "Articles"}
+
+    admin.post:
+        class: BlogBundle\Admin\PostAdmin
+        arguments: [~, BlogBundle\Entity\Post, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Post, group: "Articles"}
+
+    admin.comment:
+        class: BlogBundle\Admin\CommentAdmin
+        arguments: [~, BlogBundle\Entity\Comment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Comment, group: "Articles"}

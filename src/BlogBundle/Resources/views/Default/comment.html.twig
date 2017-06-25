@@ -1,0 +1,31 @@
+{{ % block  comment  %}}
+{% if is_granted('ROLE_USER') %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        {% endif %}
+<h2>Commentaires</h2>
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Auteur</th>
+                <th>Date</th>
+                <th>Contenu</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for comment in post.comments %}
+                <tr>
+                    <td>{{ comment.author.username }}</td>
+                    <td>{{ comment.date|date("Y/m/d") }}</td>
+                    <td>{{ comment.content }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

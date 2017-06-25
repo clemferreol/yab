@@ -1,0 +1,43 @@
+{% extends 'BlogBundle::layout.html.twig' %}
+
+{% block content %}
+<div>
+    {{ knp_pagination_render(pagination) }}
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Auteur</th>
+                        <th>Titre</th>
+                        <th>Date</th>
+                        <th>Contenu</th>
+                        <th>Catégorie</th>
+                        <th>Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for post in pagination %}
+                        <tr>
+                            <td>{{ post.author.username }}</td>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.createdAt | date('Y-m-d') }}</td>
+                            <td>{{ post.content | truncate(200, true, '...') }}</td>
+                            <td>{{ post.category }}</td>
+                            <td> <a class="pointer" onclick="document.location = '{{ path('show_article', {title: post.title}) }}';">
+                              Voir plus
+                            </a>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
